@@ -1,29 +1,87 @@
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 import type {PropsWithChildren} from 'react';
-import {
-  SafeAreaView,
-  Text,
-  View,
-} from 'react-native';
-import { styles } from './styles';
-import ButtonPrimary from '../../components/ButtonPrimary';
+import {SafeAreaView, View} from 'react-native';
+import {styles} from './styles';
+import BottomButton from '../../components/BottomButton';
+import {Button, Menu, Text, TextInput, useTheme} from 'react-native-paper';
+import InputMenu from '../../components/InputMenu';
 
-const Home = ({ navigation, route }: any): React.JSX.Element => {
+const Home = ({navigation, route}: any): React.JSX.Element => {
+  const theme = useTheme();
+
+  const [visible, setVisible] = useState(false);
+  const [selectedCourses, setSelectedCourses] = useState('Selecione o curso');
+  const [selectedPeriod, setSelectedPeriod] = useState('Selecione o período');
+
+  const courses = [
+    {
+      title: 'Análise e Desenvolvimento de Sistemas',
+    },
+    {
+      title: 'Gestão Empresarial',
+    },
+    {
+      title: 'Gestão Portuária',
+    },
+    {
+      title: 'Logística',
+    },
+    {
+      title: 'Sistemas para Internet',
+    },
+    {
+      title: 'Logística AMS',
+    },
+    {
+      title: 'Processos Gerenciais AMS',
+    },
+    {
+      title: 'Gestão de Recursos Humanos',
+    },
+    {
+      title: 'Ciência de Dados',
+    },
+  ];
+
+  const periods = [
+    {title: 'Matutino'},
+    {title: 'Vespertino'},
+    {title: 'Noturno'},
+  ];
+
   return (
     <SafeAreaView style={styles.backgroundStyle}>
-      <View style={styles.containerStyle}>
-        <View style={styles.mainStyle}>
-          <Text>Seja bem vindo(a) {route?.params?.name}</Text>
-          <Text>Selecione o curso</Text>
-          <Text>Selecione o período</Text>
-        </View>
+      <View style={styles.mainStyle}>
+        <Text variant="headlineLarge">
+          Seja bem vindo(a) {route?.params?.name}
+        </Text>
 
-        <ButtonPrimary>
-          Continuar
-        </ButtonPrimary>
+        <View style={styles.formStyle}>
+          <Text variant="titleLarge" style={{marginTop: 24}}>
+            Selecione o curso
+          </Text>
+          <InputMenu
+            selectedItem={selectedCourses}
+            setSelectedItem={setSelectedCourses}
+            items={courses}
+            width="80%"
+          />
+
+          <Text variant="titleLarge" style={{marginTop: 24}}>
+            Selecione o período
+          </Text>
+          <InputMenu
+            selectedItem={selectedPeriod}
+            setSelectedItem={setSelectedPeriod}
+            items={periods}
+            width="80%"
+          />
+        </View>
       </View>
+
+      <BottomButton>Continuar</BottomButton>
     </SafeAreaView>
   );
-}
+};
 
 export default Home;
