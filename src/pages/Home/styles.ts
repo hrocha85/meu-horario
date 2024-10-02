@@ -1,22 +1,26 @@
-import {StyleSheet, useColorScheme} from 'react-native';
-import {useTheme} from 'react-native-paper';
+import {StyleSheet} from 'react-native';
+import {useTheme} from '../../context/ThemeContext';
 
-// const theme = useTheme();
-// const isDarkMode = useColorScheme() === 'dark';
+export const useStyles = () => {
+  const {colors} = useTheme();
 
-export const styles = StyleSheet.create({
-  backgroundStyle: {
-    flex: 1,
-    backgroundColor: '#000',
-  },
-  mainStyle: {
-    display: 'flex',
-    alignItems: 'center',
-    paddingTop: 24,
-    backgroundColor: '#fff',
-    minHeight: '100%',
-  },
-  formStyle: {
-    width: '80%',
-  },
-});
+  return StyleSheet.create({
+    backgroundStyle: {
+      flex: 1,
+      backgroundColor: colors.background,
+    },
+    switcherStyle: {
+      display: 'flex',
+      alignItems: 'flex-end',
+    },
+    mainStyle: {
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'center',
+      minHeight: '80%',
+    },
+    formStyle: {
+      width: '80%',
+    },
+  });
+};

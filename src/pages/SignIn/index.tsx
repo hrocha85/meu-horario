@@ -1,7 +1,7 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {SafeAreaView, Text, View} from 'react-native';
 import {TextInput, useTheme} from 'react-native-paper';
-
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import {useForm} from 'react-hook-form';
 import {zodResolver} from '@hookform/resolvers/zod';
 import {signInSchema, SignInType} from '../../schemas/signInSchema';
@@ -45,12 +45,8 @@ const SignIn = ({navigation}: any): React.JSX.Element => {
     handleOnChangeInput('phone', formattedText);
   };
 
-  const handleContinueButton = (data: SignInType) => {
+  const handleContinueButton = async (data: SignInType) => {
     const phoneWithoutMask = removeMask(data.phone);
-
-    // if (step < 1) {
-    //   setStep((prevStep) => prevStep + 1);
-    // }
 
     const validateEmail = data.email.indexOf('@');
 
@@ -58,6 +54,8 @@ const SignIn = ({navigation}: any): React.JSX.Element => {
       const result = data.email.slice(validateEmail + 1);
 
       if (result === 'fatec.sp.gov.br') {
+        // Salvar dados do usuário no AsyncStorage
+        await AsyncStorage.setItem('userData', JSON.stringify(data));
         navigation.navigate('Home', {name: data.name});
       } else {
         setError('email', {
@@ -68,20 +66,40 @@ const SignIn = ({navigation}: any): React.JSX.Element => {
     }
   };
 
+  // Verifica se os dados do usuário já estão salvos
+  useEffect(() => {
+    const checkUserData = async () => {
+      const userData = await AsyncStorage.getItem('userData');
+      if (userData) {
+        const parsedData = JSON.parse(userData);
+        navigation.navigate('Home', {name: parsedData.name});
+      }
+    };
+
+    checkUserData();
+  }, [navigation]);
+
   return (
     <SafeAreaView style={styles.backgroundStyle}>
-      <ThemeSwitcher />
+      <View style={styles.switcherStyle}>
+        <ThemeSwitcher />
+      </View>
       <View style={styles.containerStyle}>
         <View style={styles.welcomeStyle}>
           <Text
             style={{
               fontSize: 36,
-              fontWeight: '600',
-              color: theme.colors.background,
+              fontWeight: 600,
+              color: theme.colors.onBackground,
             }}>
             Bem vindo!
           </Text>
-          <Text style={{fontSize: 18, fontWeight: '600', color: 'white'}}>
+          <Text
+            style={{
+              fontSize: 18,
+              fontWeight: 600,
+              color: theme.colors.onBackground,
+            }}>
             Gostaríamos de conhecê-lo melhor:
           </Text>
         </View>

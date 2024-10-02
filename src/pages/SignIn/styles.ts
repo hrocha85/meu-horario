@@ -2,30 +2,24 @@ import {StyleSheet} from 'react-native';
 import {useTheme} from '../../context/ThemeContext';
 
 export const useStyles = () => {
-  const {isDarkTheme} = useTheme(); // Acesse o tema atual
-  const colors = isDarkTheme
-    ? {
-        background: '#121212', // Cor de fundo do tema escuro
-        text: '#ffffff', // Cor do texto no tema escuro
-      }
-    : {
-        background: '#ffffff', // Cor de fundo do tema claro
-        text: '#000000', // Cor do texto no tema claro
-      };
+  const {colors} = useTheme();
 
   return StyleSheet.create({
     backgroundStyle: {
       flex: 1,
       backgroundColor: colors.background,
     },
+    switcherStyle: {
+      display: 'flex',
+      alignItems: 'flex-end'
+    },
     containerStyle: {
       flex: 1,
     },
     welcomeStyle: {
       justifyContent: 'center',
-      alignItems: 'center',
-      marginTop: 24,
       marginBottom: 24,
+      alignItems: 'center',
     },
     formStyle: {
       flex: 1,

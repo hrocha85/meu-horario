@@ -4,11 +4,11 @@ import {Switch} from 'react-native-paper';
 import {useTheme} from '../../context/ThemeContext';
 
 const ThemeSwitcher = () => {
-  const {isDarkTheme, toggleTheme} = useTheme();
+  const {isDarkTheme, colors, toggleTheme} = useTheme();
 
   return (
     <View style={{flexDirection: 'row', alignItems: 'center', padding: 10}}>
-      <Text>{isDarkTheme ? 'Dark Mode' : 'Light Mode'}</Text>
+      <Text style={{ color: colors.text }}>{isDarkTheme ? 'Dark Mode' : 'Light Mode'}</Text>
       <Switch value={isDarkTheme} onValueChange={toggleTheme} />
     </View>
   );

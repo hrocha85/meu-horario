@@ -1,5 +1,7 @@
 import React, {useState} from 'react';
+import {ScrollView} from 'react-native';
 import {Button, Menu, useTheme} from 'react-native-paper';
+import {useStyle} from './style';
 
 interface InputMenuProps {
   selectedItem: string;
@@ -15,6 +17,7 @@ const InputMenu = ({
   items,
 }: InputMenuProps) => {
   const theme = useTheme();
+  const styles = useStyle(width);
 
   const [visible, setVisible] = useState(false);
 
@@ -44,16 +47,18 @@ const InputMenu = ({
           {selectedItem}
         </Button>
       }>
-      {items?.map(({title}) => (
-        <Menu.Item
-          key={title}
-          onPress={() => {
-            setSelectedItem(title);
-            closeMenu();
-          }}
-          title={title}
-        />
-      ))}
+      <ScrollView style={styles.scrollView}>
+        {items?.map(({title}) => (
+          <Menu.Item
+            key={title}
+            onPress={() => {
+              setSelectedItem(title);
+              closeMenu();
+            }}
+            title={title}
+          />
+        ))}
+      </ScrollView>
     </Menu>
   );
 };

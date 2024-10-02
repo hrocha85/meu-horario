@@ -1,12 +1,13 @@
 import React, {useState} from 'react';
-import type {PropsWithChildren} from 'react';
 import {SafeAreaView, View} from 'react-native';
-import {styles} from './styles';
+import {useStyles} from './styles';
 import BottomButton from '../../components/BottomButton';
-import {Button, Menu, Text, TextInput, useTheme} from 'react-native-paper';
+import {Text, useTheme} from 'react-native-paper';
 import InputMenu from '../../components/InputMenu';
+import ThemeSwitcher from '../../components/Switch';
 
 const Home = ({navigation, route}: any): React.JSX.Element => {
+  const styles = useStyles();
   const theme = useTheme();
 
   const [visible, setVisible] = useState(false);
@@ -51,6 +52,9 @@ const Home = ({navigation, route}: any): React.JSX.Element => {
 
   return (
     <SafeAreaView style={styles.backgroundStyle}>
+      <View style={styles.switcherStyle}>
+        <ThemeSwitcher />
+      </View>
       <View style={styles.mainStyle}>
         <Text variant="headlineLarge">
           Seja bem vindo(a) {route?.params?.name}
