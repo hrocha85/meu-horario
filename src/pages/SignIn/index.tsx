@@ -1,7 +1,6 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import {SafeAreaView, Text, View} from 'react-native';
 import {TextInput, useTheme} from 'react-native-paper';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import {useForm} from 'react-hook-form';
 import {zodResolver} from '@hookform/resolvers/zod';
 import {signInSchema, SignInType} from '../../schemas/signInSchema';
@@ -9,10 +8,21 @@ import {useStyles} from './styles';
 import {formatPhoneNumber, removeMask} from '../../utils';
 import BottomButton from '../../components/BottomButton';
 import ThemeSwitcher from '../../components/Switch';
+import {MMKV} from 'react-native-mmkv';
+
+type User = {
+  name: string;
+  email: string;
+  phone: string;
+};
+
+const storage = new MMKV({id: 'myapp'});
 
 const SignIn = ({navigation}: any): React.JSX.Element => {
   const styles = useStyles();
   const theme = useTheme();
+
+  const [user, setUser] = useState<User>();
 
   const {
     register,
@@ -54,9 +64,9 @@ const SignIn = ({navigation}: any): React.JSX.Element => {
       const result = data.email.slice(validateEmail + 1);
 
       if (result === 'fatec.sp.gov.br') {
-        // Salvar dados do usuário no AsyncStorage
-        await AsyncStorage.setItem('userData', JSON.stringify(data));
-        navigation.navigate('Home', {name: data.name});
+        // storage.set('user', JSON.stringify({data}));
+        setUser({name: data.name, email: data.email, phone: data.phone});
+        // navigation.navigate('Home', {name: data.name});
       } else {
         setError('email', {
           type: 'custom',
@@ -65,19 +75,6 @@ const SignIn = ({navigation}: any): React.JSX.Element => {
       }
     }
   };
-
-  // Verifica se os dados do usuário já estão salvos
-  useEffect(() => {
-    const checkUserData = async () => {
-      const userData = await AsyncStorage.getItem('userData');
-      if (userData) {
-        const parsedData = JSON.parse(userData);
-        navigation.navigate('Home', {name: parsedData.name});
-      }
-    };
-
-    checkUserData();
-  }, [navigation]);
 
   return (
     <SafeAreaView style={styles.backgroundStyle}>
@@ -89,7 +86,7 @@ const SignIn = ({navigation}: any): React.JSX.Element => {
           <Text
             style={{
               fontSize: 36,
-              fontWeight: 600,
+              fontWeight: '600',
               color: theme.colors.onBackground,
             }}>
             Bem vindo!
@@ -97,7 +94,7 @@ const SignIn = ({navigation}: any): React.JSX.Element => {
           <Text
             style={{
               fontSize: 18,
-              fontWeight: 600,
+              fontWeight: '600',
               color: theme.colors.onBackground,
             }}>
             Gostaríamos de conhecê-lo melhor:
@@ -140,6 +137,8 @@ const SignIn = ({navigation}: any): React.JSX.Element => {
           <Text style={{color: theme.colors.error, width: '100%'}}>
             {errors?.phone?.message}
           </Text>
+
+          <Text style={{color: theme.colors.error}}>{user?.name}</Text>
         </View>
 
         <BottomButton
