@@ -6,7 +6,7 @@ import {Text, useTheme} from 'react-native-paper';
 import InputMenu from '../../components/InputMenu';
 import ThemeSwitcher from '../../components/Switch';
 
-const Home = ({navigation, route}: any): React.JSX.Element => {
+const CourseSelection = ({navigation}: any): React.JSX.Element => {
   const styles = useStyles();
   const theme = useTheme();
 
@@ -56,9 +56,7 @@ const Home = ({navigation, route}: any): React.JSX.Element => {
         <ThemeSwitcher />
       </View>
       <View style={styles.mainStyle}>
-        <Text variant="headlineLarge">
-          Seja bem vindo(a) {route?.params?.name}
-        </Text>
+        <Text variant="headlineLarge">Seja bem vindo(a)</Text>
 
         <View style={styles.formStyle}>
           <Text variant="titleLarge" style={{marginTop: 24}}>
@@ -83,9 +81,11 @@ const Home = ({navigation, route}: any): React.JSX.Element => {
         </View>
       </View>
 
-      <BottomButton>Continuar</BottomButton>
+      <BottomButton onPress={() => navigation.navigate('ClassNow')}>
+        Continuar
+      </BottomButton>
     </SafeAreaView>
   );
 };
 
-export default Home;
+export default CourseSelection;

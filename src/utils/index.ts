@@ -1,3 +1,6 @@
+import {format} from 'date-fns';
+import {ptBR} from 'date-fns/locale';
+
 const formatPhoneNumber = (value: string): string => {
   const cleaned = value.replace(/\D/g, '');
 
@@ -16,7 +19,8 @@ const removeMask = (value: string): string => {
   return value.replace(/\D/g, '');
 };
 
-export {
-  formatPhoneNumber,
-  removeMask
-}
+const formatDate = (date: Date, dateFormat: string) => {
+  return format(date, dateFormat, {locale: ptBR});
+};
+
+export {formatPhoneNumber, removeMask, formatDate};

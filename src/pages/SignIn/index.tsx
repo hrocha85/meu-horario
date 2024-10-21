@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import {SafeAreaView, Text, View} from 'react-native';
 import {TextInput, useTheme} from 'react-native-paper';
 import {useForm} from 'react-hook-form';
@@ -8,7 +8,13 @@ import {useStyles} from './styles';
 import {formatPhoneNumber, removeMask} from '../../utils';
 import BottomButton from '../../components/BottomButton';
 import ThemeSwitcher from '../../components/Switch';
-import {MMKV} from 'react-native-mmkv';
+// import {MMKV} from 'react-native-mmkv';
+
+import {
+  saveUserData,
+  getUserData,
+  clearUserData,
+} from '../../storage/userStorage';
 
 type User = {
   name: string;
@@ -16,7 +22,7 @@ type User = {
   phone: string;
 };
 
-const storage = new MMKV({id: 'myapp'});
+// const storage = new MMKV({id: 'myapp'});
 
 const SignIn = ({navigation}: any): React.JSX.Element => {
   const styles = useStyles();
@@ -66,7 +72,8 @@ const SignIn = ({navigation}: any): React.JSX.Element => {
       if (result === 'fatec.sp.gov.br') {
         // storage.set('user', JSON.stringify({data}));
         setUser({name: data.name, email: data.email, phone: data.phone});
-        // navigation.navigate('Home', {name: data.name});
+        // await saveUserData({name: data.name, email: data.email});
+        navigation.navigate('CourseSelection');
       } else {
         setError('email', {
           type: 'custom',

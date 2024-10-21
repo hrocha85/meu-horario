@@ -1,5 +1,12 @@
-import React, {createContext, useState, useContext, ReactNode} from 'react';
+import React, {
+  createContext,
+  useState,
+  useContext,
+  ReactNode,
+  useEffect,
+} from 'react';
 import {customLightTheme, customDarkTheme} from '../theme/index';
+import {Appearance} from 'react-native';
 
 interface ThemeContextType {
   isDarkTheme: boolean;
@@ -10,7 +17,19 @@ interface ThemeContextType {
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
 export const ThemeProvider = ({children}: {children: ReactNode}) => {
-  const [isDarkTheme, setIsDarkTheme] = useState(false);
+  const [isDarkTheme, setIsDarkTheme] = useState<boolean>(
+    Appearance.getColorScheme() === 'dark',
+  );
+
+  useEffect(() => {
+    const subscription = Appearance.addChangeListener(({colorScheme}) => {
+      setIsDarkTheme(colorScheme === 'dark');
+    });
+
+    return () => {
+      subscription.remove();
+    };
+  }, []);
 
   const colors = isDarkTheme ? customDarkTheme.colors : customLightTheme.colors;
 

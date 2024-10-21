@@ -4,9 +4,12 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {adaptNavigationTheme, PaperProvider} from 'react-native-paper';
 import AwesomeIcon from 'react-native-vector-icons/FontAwesome';
 import {customLightTheme, customDarkTheme} from './src/theme/index';
-import SignInScreen from './src/pages/SignIn/index';
-import HomeScreen from './src/pages/Home/index';
 import {ThemeProvider, useTheme} from './src/context/ThemeContext';
+
+import SignInScreen from './src/pages/SignIn/index';
+import CourseSelectionScreen from './src/pages/CourseSelection/index';
+import ClassNowScreen from './src/pages/ClassNow/index';
+import ClassesTableScreen from './src/pages/ClassesTable/index';
 
 const Stack = createNativeStackNavigator();
 const {LightTheme, DarkTheme} = adaptNavigationTheme({
@@ -39,8 +42,18 @@ const InnerRoutes = () => {
             options={{headerShown: false}}
           />
           <Stack.Screen
-            name="Home"
-            component={HomeScreen}
+            name="CourseSelection"
+            component={CourseSelectionScreen}
+            options={{headerShown: false}}
+          />
+          <Stack.Screen
+            name="ClassNow"
+            component={ClassNowScreen}
+            options={{headerShown: false}}
+          />
+          <Stack.Screen
+            name="ClassesTable"
+            component={ClassesTableScreen}
             options={{headerShown: false}}
           />
         </Stack.Navigator>
