@@ -4,7 +4,42 @@ import {useStyles} from './styles';
 import BottomButton from '../../components/BottomButton';
 import {Text, useTheme} from 'react-native-paper';
 import InputMenu from '../../components/InputMenu';
-import ThemeSwitcher from '../../components/Switch';
+
+const courses = [
+  {
+    title: 'Análise e Desenvolvimento de Sistemas',
+  },
+  {
+    title: 'Gestão Empresarial',
+  },
+  {
+    title: 'Gestão Portuária',
+  },
+  {
+    title: 'Logística',
+  },
+  {
+    title: 'Sistemas para Internet',
+  },
+  {
+    title: 'Logística AMS',
+  },
+  {
+    title: 'Processos Gerenciais AMS',
+  },
+  {
+    title: 'Gestão de Recursos Humanos',
+  },
+  {
+    title: 'Ciência de Dados',
+  },
+];
+
+const periods = [
+  {title: 'Matutino'},
+  {title: 'Vespertino'},
+  {title: 'Noturno'},
+];
 
 const CourseSelection = ({navigation}: any): React.JSX.Element => {
   const styles = useStyles();
@@ -14,47 +49,12 @@ const CourseSelection = ({navigation}: any): React.JSX.Element => {
   const [selectedCourses, setSelectedCourses] = useState('Selecione o curso');
   const [selectedPeriod, setSelectedPeriod] = useState('Selecione o período');
 
-  const courses = [
-    {
-      title: 'Análise e Desenvolvimento de Sistemas',
-    },
-    {
-      title: 'Gestão Empresarial',
-    },
-    {
-      title: 'Gestão Portuária',
-    },
-    {
-      title: 'Logística',
-    },
-    {
-      title: 'Sistemas para Internet',
-    },
-    {
-      title: 'Logística AMS',
-    },
-    {
-      title: 'Processos Gerenciais AMS',
-    },
-    {
-      title: 'Gestão de Recursos Humanos',
-    },
-    {
-      title: 'Ciência de Dados',
-    },
-  ];
-
-  const periods = [
-    {title: 'Matutino'},
-    {title: 'Vespertino'},
-    {title: 'Noturno'},
-  ];
+  const handleChange = (value: string, set: any) => {
+    set(value);
+  };
 
   return (
     <SafeAreaView style={styles.backgroundStyle}>
-      <View style={styles.switcherStyle}>
-        <ThemeSwitcher />
-      </View>
       <View style={styles.mainStyle}>
         <Text variant="headlineLarge">Seja bem vindo(a)</Text>
 
@@ -64,7 +64,7 @@ const CourseSelection = ({navigation}: any): React.JSX.Element => {
           </Text>
           <InputMenu
             selectedItem={selectedCourses}
-            setSelectedItem={setSelectedCourses}
+            onSelect={item => handleChange(item.title, setSelectedCourses)}
             items={courses}
             width="80%"
           />
@@ -74,7 +74,7 @@ const CourseSelection = ({navigation}: any): React.JSX.Element => {
           </Text>
           <InputMenu
             selectedItem={selectedPeriod}
-            setSelectedItem={setSelectedPeriod}
+            onSelect={item => handleChange(item.title, setSelectedCourses)}
             items={periods}
             width="80%"
           />

@@ -8,10 +8,15 @@ export const useStyles = () => {
     backgroundStyle: {
       flex: 1,
       backgroundColor: colors.background,
+      marginTop: 30,
     },
-    titleStyle: {
-      marginTop: 28,
-      alignItems: 'center',
+    mainContainerStyle: {
+      minHeight: '75%',
+      marginTop: 16,
+    },
+    selectedStyle: {
+      width: '80%',
+      marginHorizontal: 'auto',
     },
   });
 };

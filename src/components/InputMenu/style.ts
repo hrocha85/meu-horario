@@ -5,7 +5,6 @@ export const useStyle = (width: number) =>
     menuContent: {
       marginTop: 54,
       minWidth: width,
-      borderRadius: 24,
       maxHeight: 200,
     },
     scrollView: {

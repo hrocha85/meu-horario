@@ -6,25 +6,30 @@ import {styles} from './styles';
 
 interface BottomButtonProps extends ButtonProps {
   children: React.ReactNode;
+  isAbsolute?: boolean;
 }
 
 const BottomButton: React.FC<BottomButtonProps> = (props: any) => {
-  const theme = useTheme();
+  const {colors} = useTheme();
+  const {children, isAbsolute, ...rest} = props;
 
   return (
-    <View style={styles.buttonContainer}>
+    <View
+      style={[
+        styles.buttonContainer,
+        isAbsolute ? styles.withAbsolute : styles.withoutAbsolute,
+      ]}>
       <Button
         mode="contained"
-        labelStyle={{fontSize: 20, color: theme.colors.background}}
+        labelStyle={{fontSize: 20, color: colors.buttonText}}
         style={{
-          backgroundColor: theme.colors.onPrimaryContainer,
-          color: theme.colors.onBackground,
+          backgroundColor: colors.primary,
           borderRadius: 8,
           marginBottom: 24,
           padding: 8,
         }}
-        {...props}>
-        {props.children}
+        {...rest}>
+        {children}
       </Button>
     </View>
   );

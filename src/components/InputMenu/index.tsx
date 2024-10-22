@@ -5,17 +5,12 @@ import {useStyle} from './style';
 
 interface InputMenuProps {
   selectedItem: string;
-  setSelectedItem: any;
-  items: {title: string}[];
+  onSelect: (item: {title: string; value?: string}) => void;
+  items: {title: string; value?: string}[];
   width: any;
 }
 
-const InputMenu = ({
-  selectedItem,
-  setSelectedItem,
-  width,
-  items,
-}: InputMenuProps) => {
+const InputMenu = ({selectedItem, onSelect, width, items}: InputMenuProps) => {
   const theme = useTheme();
   const styles = useStyle(width);
 
@@ -29,7 +24,6 @@ const InputMenu = ({
       contentStyle={{
         marginTop: 54,
         minWidth: width,
-        borderRadius: 24,
       }}
       visible={visible}
       onDismiss={closeMenu}
@@ -48,14 +42,14 @@ const InputMenu = ({
         </Button>
       }>
       <ScrollView style={styles.scrollView}>
-        {items?.map(({title}) => (
+        {items?.map(item => (
           <Menu.Item
-            key={title}
+            key={item.title}
             onPress={() => {
-              setSelectedItem(title);
+              onSelect(item);
               closeMenu();
             }}
-            title={title}
+            title={item.title}
           />
         ))}
       </ScrollView>

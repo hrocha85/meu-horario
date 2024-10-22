@@ -9,10 +9,6 @@ export const useStyles = () => {
       flex: 1,
       backgroundColor: colors.background,
     },
-    switcherStyle: {
-      display: 'flex',
-      alignItems: 'flex-end',
-    },
     mainStyle: {
       display: 'flex',
       justifyContent: 'center',

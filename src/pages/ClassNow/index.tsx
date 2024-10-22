@@ -3,7 +3,6 @@ import {SafeAreaView, View} from 'react-native';
 import {useStyles} from './styles';
 import BottomButton from '../../components/BottomButton';
 import {Text, useTheme} from 'react-native-paper';
-import ThemeSwitcher from '../../components/Switch';
 import {format} from 'date-fns';
 
 const ClassNow = ({navigation}: any): React.JSX.Element => {
@@ -22,9 +21,6 @@ const ClassNow = ({navigation}: any): React.JSX.Element => {
 
   return (
     <SafeAreaView style={styles.backgroundStyle}>
-      <View style={styles.switcherStyle}>
-        <ThemeSwitcher />
-      </View>
       <View style={styles.mainStyle}>
         <Text variant="headlineLarge">Olá, Henrique!</Text>
         <Text variant="headlineSmall">São {format(currentTime, 'kk:mm')}</Text>

@@ -1,28 +1,56 @@
 import * as React from 'react';
 import {View} from 'react-native';
-import {Card, Text, Divider} from 'react-native-paper';
+import {Card, Text, Divider, Button} from 'react-native-paper';
 import {useStyles} from './styles';
+import {useTheme} from '../../../context/ThemeContext';
+import {useNavigation} from '@react-navigation/native';
 
 interface ClassCardProps {
-  className: string;
   hour: string;
+  className: string;
+  classroom: string;
 }
 
-const ClassCard = ({className, hour}: ClassCardProps) => {
+const ClassCard = ({className, hour, classroom}: ClassCardProps) => {
   const styles = useStyles();
+  const {colors} = useTheme();
+  const navigation = useNavigation<any>();
 
   return (
     <Card style={styles.cardStyle}>
       <Card.Content>
+        <View style={styles.cardTop}>
+          <Text variant="headlineLarge" style={{marginRight: 4}}>
+            {hour}
+          </Text>
+          <Button
+            mode="contained"
+            textColor={colors.background}
+            style={{
+              backgroundColor: colors.error,
+              borderRadius: 8,
+            }}
+            onPress={() => {
+              navigation.navigate('Report', {
+                className: className,
+                hour: hour,
+                classroom: classroom,
+              });
+            }}>
+            Reportar erro
+          </Button>
+        </View>
+        <Divider style={styles.dividerStyle} />
         <View style={styles.row}>
-          {/* Conteúdo do lado esquerdo */}
-          <Text style={styles.textStyle}>{className}</Text>
+          <View style={styles.column}>
+            <Text variant="titleMedium">Aula</Text>
+            <Text style={styles.textStyle}>{className}</Text>
+          </View>
 
-          {/* Divider no centro */}
-          <Divider style={styles.dividerStyle} />
-
-          {/* Conteúdo do lado direito */}
-          <Text style={styles.textStyle}>{hour}</Text>
+          <View style={styles.column}>
+            <Text variant="titleMedium">Sala</Text>
+            <Text style={styles.textStyle}>{classroom}</Text>
+          </View>
         </View>
       </Card.Content>
     </Card>

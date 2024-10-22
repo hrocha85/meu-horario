@@ -8,23 +8,36 @@ export const useStyles = () => {
     cardStyle: {
       margin: 16,
       padding: 16,
-      backgroundColor: colors.cardBackground, // Usando cor do tema
+      backgroundColor: colors.card,
+    },
+    cardTop: {
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+      alignItems: 'center',
+      marginBottom: 8,
     },
     row: {
-      flexDirection: 'row', // Organiza em linha
-      alignItems: 'center', // Alinha verticalmente no centro
-      justifyContent: 'space-between', // Espaço entre os itens
+      flexDirection: 'row',
+      alignItems: 'center',
+      justifyContent: 'space-between',
+      width: '100%',
+    },
+    column: {
+      flexDirection: 'column',
+      alignItems: 'center',
+      justifyContent: 'flex-start',
+      width: '50%',
+      minHeight: 50,
+      paddingHorizontal: 8,
     },
     textStyle: {
-      flex: 1, // Divide o espaço igualmente
-      textAlign: 'center', // Centraliza o texto
-      color: colors.textPrimary, // Cor do texto de acordo com o tema
+      textAlign: 'center',
+      color: colors.text,
     },
     dividerStyle: {
-      width: 1, // Define a largura do Divider
-      height: '100%', // O Divider ocupa toda a altura da linha
-      backgroundColor: colors.divider, // Usando cor do Divider do tema
-      marginHorizontal: 16, // Espaçamento entre os textos e o Divider
+      width: '100%',
+      backgroundColor: colors.primary,
+      marginVertical: 16,
     },
   });
 };

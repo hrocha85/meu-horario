@@ -8,8 +8,10 @@ const ThemeSwitcher = () => {
 
   return (
     <View style={{flexDirection: 'row', alignItems: 'center', padding: 10}}>
-      <Text style={{ color: colors.text }}>{isDarkTheme ? 'Dark Mode' : 'Light Mode'}</Text>
-      <Switch value={isDarkTheme} onValueChange={toggleTheme} />
+      <Text style={{color: colors.buttonText}}>
+        {isDarkTheme ? 'Dark Mode' : 'Light Mode'}
+      </Text>
+      <Switch value={isDarkTheme} onValueChange={toggleTheme} color="#fafafa" />
     </View>
   );
 };

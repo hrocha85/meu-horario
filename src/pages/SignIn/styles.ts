@@ -8,10 +8,7 @@ export const useStyles = () => {
     backgroundStyle: {
       flex: 1,
       backgroundColor: colors.background,
-    },
-    switcherStyle: {
-      display: 'flex',
-      alignItems: 'flex-end'
+      marginTop: 30,
     },
     containerStyle: {
       flex: 1,
@@ -24,9 +21,8 @@ export const useStyles = () => {
     formStyle: {
       flex: 1,
       justifyContent: 'center',
-      alignItems: 'center',
-      width: '100%',
-      padding: 24,
+      width: '80%',
+      marginHorizontal: 'auto',
     },
     inputStyle: {
       width: '100%',

@@ -10,6 +10,8 @@ import SignInScreen from './src/pages/SignIn/index';
 import CourseSelectionScreen from './src/pages/CourseSelection/index';
 import ClassNowScreen from './src/pages/ClassNow/index';
 import ClassesTableScreen from './src/pages/ClassesTable/index';
+import ReportScreen from './src/pages/Report/index';
+import CustomHeader from './src/components/CustomHeader';
 
 const Stack = createNativeStackNavigator();
 const {LightTheme, DarkTheme} = adaptNavigationTheme({
@@ -39,22 +41,37 @@ const InnerRoutes = () => {
           <Stack.Screen
             name="SignIn"
             component={SignInScreen}
-            options={{headerShown: false}}
+            options={{
+              header: () => <CustomHeader />,
+            }}
           />
           <Stack.Screen
             name="CourseSelection"
             component={CourseSelectionScreen}
-            options={{headerShown: false}}
+            options={{
+              header: () => <CustomHeader />,
+            }}
           />
           <Stack.Screen
             name="ClassNow"
             component={ClassNowScreen}
-            options={{headerShown: false}}
+            options={{
+              header: () => <CustomHeader />,
+            }}
           />
           <Stack.Screen
             name="ClassesTable"
             component={ClassesTableScreen}
-            options={{headerShown: false}}
+            options={{
+              header: () => <CustomHeader />,
+            }}
+          />
+          <Stack.Screen
+            name="Report"
+            component={ReportScreen}
+            options={{
+              header: () => <CustomHeader />,
+            }}
           />
         </Stack.Navigator>
       </NavigationContainer>
