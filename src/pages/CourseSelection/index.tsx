@@ -56,7 +56,13 @@ const CourseSelection = ({navigation}: any): React.JSX.Element => {
   return (
     <SafeAreaView style={styles.backgroundStyle}>
       <View style={styles.mainStyle}>
-        <Text variant="headlineLarge">Seja bem vindo(a)</Text>
+        <Text variant="headlineLarge">Olá Henrique!</Text>
+        <Text
+          variant="bodyLarge"
+          style={{marginTop: 16, paddingHorizontal: 24}}>
+          Para continuarmos com seu cadastro, precisamos que você nos informe
+          seu curso e período.
+        </Text>
 
         <View style={styles.formStyle}>
           <Text variant="titleLarge" style={{marginTop: 24}}>
@@ -74,14 +80,19 @@ const CourseSelection = ({navigation}: any): React.JSX.Element => {
           </Text>
           <InputMenu
             selectedItem={selectedPeriod}
-            onSelect={item => handleChange(item.title, setSelectedCourses)}
+            onSelect={item => handleChange(item.title, setSelectedPeriod)}
             items={periods}
             width="80%"
           />
         </View>
       </View>
 
-      <BottomButton onPress={() => navigation.navigate('ClassNow')}>
+      <BottomButton
+        onPress={() => navigation.replace('ClassNow')}
+        disabled={
+          selectedCourses == 'Selecione o curso' ||
+          selectedPeriod == 'Selecione o período'
+        }>
         Continuar
       </BottomButton>
     </SafeAreaView>

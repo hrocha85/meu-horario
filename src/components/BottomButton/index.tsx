@@ -11,7 +11,7 @@ interface BottomButtonProps extends ButtonProps {
 
 const BottomButton: React.FC<BottomButtonProps> = (props: any) => {
   const {colors} = useTheme();
-  const {children, isAbsolute, ...rest} = props;
+  const {children, isAbsolute = false, ...rest} = props;
 
   return (
     <View
@@ -23,9 +23,10 @@ const BottomButton: React.FC<BottomButtonProps> = (props: any) => {
         mode="contained"
         labelStyle={{fontSize: 20, color: colors.buttonText}}
         style={{
-          backgroundColor: colors.primary,
+          backgroundColor: rest.disabled
+            ? colors.onPrimaryDisabled
+            : colors.primary,
           borderRadius: 8,
-          marginBottom: 24,
           padding: 8,
         }}
         {...rest}>

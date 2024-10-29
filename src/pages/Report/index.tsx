@@ -1,8 +1,8 @@
 import React, {useState} from 'react';
-import {SafeAreaView, View} from 'react-native';
+import {KeyboardAvoidingView, ScrollView, View} from 'react-native';
 import {useStyles} from './styles';
 import BottomButton from '../../components/BottomButton';
-import {Text, TextInput, useTheme} from 'react-native-paper';
+import {Divider, Text, TextInput, useTheme} from 'react-native-paper';
 import InputMenu from '../../components/InputMenu';
 
 const errorTypes = [
@@ -80,49 +80,89 @@ const ClassesTable = ({route}): React.JSX.Element => {
   const [selectedValueError, setSelectedValueError] = useState('');
   const [description, setDescription] = useState('');
 
-  const handleSelectError = value => {
+  const handleSelectError = (value: {title: string; value: string}) => {
+    console.log(value);
     setSelectedTypeError(value.title);
     setSelectedValueError(value.value);
   };
 
   return (
-    <SafeAreaView style={styles.backgroundStyle}>
-      <Text
-        variant="headlineLarge"
-        style={{textAlign: 'center', marginVertical: 12}}>
-        Reportar Erro
-      </Text>
-
-      <View style={styles.mainContainerStyle}>
-        <View style={styles.selectedStyle}>
-          <Text variant="titleLarge" style={{marginVertical: 16}}>
-            Escolha o tipo de erro
+    <View style={styles.backgroundStyle}>
+      <KeyboardAvoidingView style={{flex: 1}} behavior={'height'}>
+        <ScrollView contentContainerStyle={{flexGrow: 1}}>
+          <Text
+            variant="headlineLarge"
+            style={{textAlign: 'center', marginVertical: 12}}>
+            Reportar Erro
           </Text>
-          <InputMenu
-            selectedItem={selectedTypeError}
-            onSelect={item => handleSelectError(item)}
-            items={errorTypes}
-            width="80%"
-          />
 
-          <Text variant="titleLarge" style={{marginVertical: 16}}>
-            Descreva o erro encontrado
+          <Text
+            variant="headlineSmall"
+            style={{textAlign: 'center', marginVertical: 12}}>
+            Aula: {route.params.className}
           </Text>
-          <TextInput
-            multiline
-            numberOfLines={12}
-            value={description}
-            onChangeText={setDescription}
-            placeholder={
-              selectedValueError
-                ? messageTypes[selectedValueError]
-                : 'Digite sua mensagem aqui...'
-            }
-          />
-        </View>
-      </View>
-      <BottomButton>Enviar</BottomButton>
-    </SafeAreaView>
+
+          <View
+            style={{
+              flexDirection: 'row',
+              justifyContent: 'center',
+              gap: 8,
+            }}>
+            <Text
+              variant="headlineSmall"
+              style={{textAlign: 'center', marginVertical: 12}}>
+              Sala: {route.params.classroom}
+            </Text>
+
+            <Divider
+              style={{
+                width: 2,
+                height: '100%',
+                backgroundColor: theme.colors.primary,
+              }}
+            />
+
+            <Text
+              variant="headlineSmall"
+              style={{textAlign: 'center', marginVertical: 12}}>
+              Hora: {route.params.hour}
+            </Text>
+          </View>
+
+          <View style={styles.mainContainerStyle}>
+            <View style={styles.selectedStyle}>
+              <Text variant="titleLarge" style={{marginVertical: 16}}>
+                Escolha o tipo de erro
+              </Text>
+              <InputMenu
+                selectedItem={selectedTypeError}
+                onSelect={(item: {title: string; value: string}) => {
+                  handleSelectError(item);
+                }}
+                items={errorTypes}
+                width="80%"
+              />
+
+              <Text variant="titleLarge" style={{marginVertical: 16}}>
+                Descreva o erro encontrado
+              </Text>
+              <TextInput
+                multiline
+                numberOfLines={12}
+                value={description}
+                onChangeText={setDescription}
+                placeholder={
+                  selectedValueError
+                    ? messageTypes[selectedValueError]
+                    : 'Digite sua mensagem aqui...'
+                }
+              />
+            </View>
+          </View>
+          <BottomButton>Enviar</BottomButton>
+        </ScrollView>
+      </KeyboardAvoidingView>
+    </View>
   );
 };
 

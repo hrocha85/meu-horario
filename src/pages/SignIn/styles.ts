@@ -8,7 +8,7 @@ export const useStyles = () => {
     backgroundStyle: {
       flex: 1,
       backgroundColor: colors.background,
-      marginTop: 30,
+      paddingTop: 30,
     },
     containerStyle: {
       flex: 1,

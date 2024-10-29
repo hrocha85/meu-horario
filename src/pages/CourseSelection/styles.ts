@@ -16,6 +16,7 @@ export const useStyles = () => {
       minHeight: '80%',
     },
     formStyle: {
+      marginTop: 12,
       width: '80%',
     },
   });

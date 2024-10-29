@@ -5,6 +5,7 @@ import {adaptNavigationTheme, PaperProvider} from 'react-native-paper';
 import AwesomeIcon from 'react-native-vector-icons/FontAwesome';
 import {customLightTheme, customDarkTheme} from './src/theme/index';
 import {ThemeProvider, useTheme} from './src/context/ThemeContext';
+import {BackHandler} from 'react-native';
 
 import SignInScreen from './src/pages/SignIn/index';
 import CourseSelectionScreen from './src/pages/CourseSelection/index';
@@ -37,42 +38,16 @@ const InnerRoutes = () => {
       }}
       theme={isDarkTheme ? customDarkTheme : customLightTheme}>
       <NavigationContainer theme={isDarkTheme ? DarkTheme : LightTheme}>
-        <Stack.Navigator>
-          <Stack.Screen
-            name="SignIn"
-            component={SignInScreen}
-            options={{
-              header: () => <CustomHeader />,
-            }}
-          />
+        <Stack.Navigator
+          screenOptions={{headerShown: true, header: () => <CustomHeader />}}>
+          {/* <Stack.Screen name="SignIn" component={SignInScreen} />
           <Stack.Screen
             name="CourseSelection"
             component={CourseSelectionScreen}
-            options={{
-              header: () => <CustomHeader />,
-            }}
-          />
-          <Stack.Screen
-            name="ClassNow"
-            component={ClassNowScreen}
-            options={{
-              header: () => <CustomHeader />,
-            }}
-          />
-          <Stack.Screen
-            name="ClassesTable"
-            component={ClassesTableScreen}
-            options={{
-              header: () => <CustomHeader />,
-            }}
-          />
-          <Stack.Screen
-            name="Report"
-            component={ReportScreen}
-            options={{
-              header: () => <CustomHeader />,
-            }}
-          />
+          /> */}
+          <Stack.Screen name="ClassNow" component={ClassNowScreen} />
+          <Stack.Screen name="ClassesTable" component={ClassesTableScreen} />
+          <Stack.Screen name="Report" component={ReportScreen} />
         </Stack.Navigator>
       </NavigationContainer>
     </PaperProvider>

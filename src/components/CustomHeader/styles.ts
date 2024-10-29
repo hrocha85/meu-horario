@@ -10,24 +10,19 @@ export const useStyles = () => {
       alignItems: 'center',
       justifyContent: 'space-between',
       padding: 10,
+      height: 50,
       backgroundColor: colors.primary,
+      borderBottomColor: colors.buttonText,
+      borderBottomWidth: 1,
     },
     backButton: {
-      padding: 10,
+      padding: 5,
     },
-    backButtonText: {
-      color: '#fff',
-      fontSize: 20,
-    },
-    title: {
-      color: '#fff',
-      fontSize: 18,
-    },
-    themeButton: {
-      padding: 10,
-    },
-    themeButtonText: {
-      color: '#fff',
+    welcome: {
+      display: 'flex',
+      flexDirection: 'row',
+      gap: 8,
+      marginLeft: 8,
     },
   });
 };

@@ -7,12 +7,11 @@ export const useStyles = () => {
   return StyleSheet.create({
     backgroundStyle: {
       flex: 1,
-      backgroundColor: colors.background,
       marginTop: 30,
     },
     mainContainerStyle: {
-      minHeight: '75%',
       marginTop: 16,
+      marginBottom: 48,
     },
     selectedStyle: {
       width: '80%',
